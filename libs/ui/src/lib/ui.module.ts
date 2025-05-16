@@ -1,32 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ButtonComponent } from './button/button.component';
-import { CardComponent } from './card/card.component';
-import { ColorPickerComponent } from './color-picker/color-picker.component';
-import { DrawingGridComponent } from './drawing-grid/drawing-grid.component';
-import { PlaygroundComponent } from './playground/playground.component';
-import { SelectComponent } from './select/select.component';
-import { TooltipDirective } from './tooltip/tooltip.directive';
+import { FormsModule } from '@angular/forms';
+import { GameComponent } from './game/game.component';
+import { HomeComponent } from './home/home.component';
+import { JoinComponent } from './join/join.component';
+import { PlayersComponent } from './players/players.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    ColorPickerComponent,
-    DrawingGridComponent,
-    CardComponent,
-    TooltipDirective,
-    SelectComponent,
-    PlaygroundComponent,
-    ButtonComponent,
+    FormsModule,
+    GameComponent,
+    HomeComponent,
+    JoinComponent,
+    PlayersComponent,
   ],
-  exports: [
-    ColorPickerComponent,
-    DrawingGridComponent,
-    CardComponent,
-    TooltipDirective,
-    SelectComponent,
-    PlaygroundComponent,
-    ButtonComponent,
-  ],
+  exports: [GameComponent, HomeComponent, JoinComponent, PlayersComponent],
 })
 export class UiModule {}

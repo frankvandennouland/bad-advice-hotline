@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@bad-advice-hotline/store/playground": ["libs/store/playground/src/index.ts"],
+      "@bad-advice-hotline/store": ["libs/store/badAdviceHoteline/src/index.ts"],
       "@bad-advice-hotline/nx-extensions": ["libs/nx-extensions/src/index.ts"],
       "@bad-advice-hotline/tailwind.config": ["tailwind.config.js"],
       "@bad-advice-hotline/ui": ["libs/ui/src/index.ts"]

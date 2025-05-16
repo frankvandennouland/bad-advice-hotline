@@ -29,9 +29,6 @@
     "test": {
       "inputs": ["default", "^production", "{workspaceRoot}/jest.preset.js"]
     },
-    "e2e": {
-      "inputs": ["default", "^production"]
-    },
     "lint": {
       "inputs": [
         "default",
@@ -51,7 +48,6 @@
           "build",
           "lint",
           "test",
-          "e2e",
           "build-storybook",
           "serve",
           "storybook"

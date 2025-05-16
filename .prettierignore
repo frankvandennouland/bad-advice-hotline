@@ -3,3 +3,6 @@
 /coverage
 .angular
 /apps/frontend/dist/
+
+/.nx/cache
+/.nx/workspace-data

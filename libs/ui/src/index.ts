@@ -1,3 +1,5 @@
-export * from './lib/global-interfaces/color.interface';
-export * from './lib/global-interfaces/pixel.interface';
+export * from './lib/game/game.component';
+export * from './lib/home/home.component';
+export * from './lib/join/join.component';
+export * from './lib/players/players.component';
 export * from './lib/ui.module';

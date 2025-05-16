@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Meta, StoryFn, StoryObj, moduleMetadata } from '@storybook/angular';
-import {ButtonComponent} from "./button.component";
+import { ButtonComponent } from './button.component';
 
 export default {
   title: 'Components/Button',

@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  playgroundServiceUrl: 'http://localhost:4000/playground',
+  badAdviceHotlineServiceUrl: 'http://localhost:4000/bad-advice-hotline',
 };
