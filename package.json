@@ -1,11 +1,11 @@
 {
-  "name": "@algorithm-dashboard/source",
+  "name": "@bad-advice-hotline/source",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
     "start": "npm run start:frontend & npm run start:storybook & encore run",
     "start:backend": "encore run",
-    "start:frontend": "nx run algorithm-dashboard:serve",
+    "start:frontend": "nx run bad-advice-hotline:serve",
     "start:storybook": "nx run ui:storybook",
     "build": "nx build",
     "test": "nx test",

@@ -2,8 +2,7 @@
 
 #### Frontend
 
-- algorithm-dashboard
-- algorithm-dashboard e2e (not implemented at the moment)
+- bad-advice-hotline
 
 #### Backend
 

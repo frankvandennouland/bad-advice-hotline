@@ -1,0 +1,114 @@
+{
+  "name": "bad-advice-hotline",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "bad-advice-hotline",
+  "sourceRoot": "apps/frontend/bad-advice-hotline/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "apps/frontend/dist/bad-advice-hotline",
+        "index": "apps/frontend/bad-advice-hotline/src/index.html",
+        "main": "apps/frontend/bad-advice-hotline/src/main.ts",
+        "polyfills": ["zone.js"],
+        "baseHref": "/frontend/bad-advice-hotline/",
+        "tsConfig": "apps/frontend/bad-advice-hotline/tsconfig.app.json",
+        "assets": [
+          "apps/frontend/bad-advice-hotline/src/favicon.ico",
+          "apps/frontend/bad-advice-hotline/src/assets"
+        ],
+        "styles": ["./styles.scss"],
+        "scripts": [],
+        "fileReplacements": [
+          {
+            "replace": "apps/frontend/bad-advice-hotline/src/environments/environment.ts",
+            "with": "apps/frontend/bad-advice-hotline/src/environments/environment.prod.ts"
+          }
+        ]
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all",
+          "fileReplacements": [
+            {
+              "replace": "apps/frontend/bad-advice-hotline/src/environments/environment.ts",
+              "with": "apps/frontend/bad-advice-hotline/src/environments/environment.prod.ts"
+            }
+          ]
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "bad-advice-hotline:build:production"
+        },
+        "development": {
+          "buildTarget": "bad-advice-hotline:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "bad-advice-hotline:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/frontend/bad-advice-hotline/**/*.ts",
+          "apps/frontend/bad-advice-hotline/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/frontend/bad-advice-hotline/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "serve-static": {
+      "executor": "@nx/web:file-server",
+      "options": {
+        "buildTarget": "bad-advice-hotline:build"
+      }
+    }
+  }
+}

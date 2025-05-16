@@ -15,10 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@algorithm-dashboard/store/playground": ["libs/store/playground/src/index.ts"],
-      "@algorithm-dashboard/nx-extensions": ["libs/nx-extensions/src/index.ts"],
-      "@algorithm-dashboard/tailwind.config": ["tailwind.config.js"],
-      "@algorithm-dashboard/ui": ["libs/ui/src/index.ts"]
+      "@bad-advice-hotline/store/playground": ["libs/store/playground/src/index.ts"],
+      "@bad-advice-hotline/nx-extensions": ["libs/nx-extensions/src/index.ts"],
+      "@bad-advice-hotline/tailwind.config": ["tailwind.config.js"],
+      "@bad-advice-hotline/ui": ["libs/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
