@@ -1,6 +1,42 @@
-<div class="container mx-auto p-4">
-  <div class="max-w-2xl mx-auto">
-    <h1 class="text-3xl font-bold mb-8 text-center">Bad Advice Hotline</h1>
-    <router-outlet></router-outlet>
+<nav class="bg-white shadow">
+  <div class="container mx-auto px-4">
+    <div class="flex justify-between h-16">
+      <div class="flex">
+        <a routerLink="/" class="flex items-center">
+          <span class="text-xl font-bold text-indigo-600"
+            >Bad Advice Hotline</span
+          >
+        </a>
+      </div>
+
+      <div class="flex items-center space-x-4">
+        <ng-container *ngIf="store.currentUser(); else authLinks">
+          <a routerLink="/profile" class="text-gray-600 hover:text-gray-900"
+            >Profile</a
+          >
+          <button
+            (click)="onLogout()"
+            class="text-gray-600 hover:text-gray-900"
+          >
+            Logout
+          </button>
+        </ng-container>
+        <ng-template #authLinks>
+          <a routerLink="/login" class="text-gray-600 hover:text-gray-900"
+            >Login</a
+          >
+          <a routerLink="/signup" class="text-gray-600 hover:text-gray-900"
+            >Sign Up</a
+          >
+          <a routerLink="/join" class="text-gray-600 hover:text-gray-900"
+            >Join Game</a
+          >
+        </ng-template>
+      </div>
+    </div>
   </div>
-</div>
+</nav>
+
+<main>
+  <router-outlet></router-outlet>
+</main>

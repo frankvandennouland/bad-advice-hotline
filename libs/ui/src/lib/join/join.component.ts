@@ -74,8 +74,14 @@ export class JoinComponent {
 
   onJoinGame() {
     if (this.gameCode.trim()) {
-      this.store.loadGame(this.gameCode.trim());
-      this.gameCode = '';
+      this.store.loadGame(this.gameCode.trim()).subscribe({
+        next: () => {
+          this.gameCode = '';
+        },
+        error: (error) => {
+          console.error('Failed to join game:', error);
+        },
+      });
     }
   }
 }

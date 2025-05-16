@@ -70,8 +70,14 @@ export class HomeComponent {
 
   onCreateGame() {
     if (this.question.trim()) {
-      this.store.createGame({ question: this.question });
-      this.question = '';
+      this.store.createGame({ question: this.question.trim() }).subscribe({
+        next: () => {
+          this.question = '';
+        },
+        error: (error) => {
+          console.error('Failed to create game:', error);
+        },
+      });
     }
   }
 }

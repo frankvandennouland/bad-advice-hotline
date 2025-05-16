@@ -1,0 +1,30 @@
+{
+  "name": "bad-advice-hotline-store",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/store/badAdviceHotline/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/store/badAdviceHotline",
+        "main": "libs/store/badAdviceHotline/src/index.ts",
+        "tsConfig": "libs/store/badAdviceHotline/tsconfig.json",
+        "assets": ["libs/store/badAdviceHotline/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/store/badAdviceHotline/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}

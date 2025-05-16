@@ -1,7 +1,6 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-dist
 tmp
 /out-tsc
 
@@ -44,7 +43,6 @@ Thumbs.db
 encore.gen.go
 encore.gen.cue
 /encore.gen
-/apps/frontend/dist/
 
 # Environment files
 .env
