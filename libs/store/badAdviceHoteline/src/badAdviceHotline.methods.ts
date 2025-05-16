@@ -58,9 +58,17 @@ export function withBadAdviceHotlineMethods() {
                 .pipe(
                   tap({
                     next: (advice) => {
-                      patchState(state, (state) => ({
-                        advice: [...state.advice, advice],
-                      }));
+                      const currentAdvice = state.advice();
+
+                      if (!currentAdvice || currentAdvice.length === 0) {
+                        return patchState(state, {
+                          advice: [advice],
+                        });
+                      }
+
+                      patchState(state, {
+                        advice: [...currentAdvice, advice],
+                      });
                     },
                     error: (error) => {
                       patchState(state, {
@@ -112,12 +120,11 @@ export function withBadAdviceHotlineMethods() {
               return service.scoreAdvice(gameId, adviceId).pipe(
                 tap({
                   next: (scoredAdvice) => {
-                    patchState(state, (state) => {
-                      const updatedAdvice = state.advice.map((a: Advice) =>
-                        a.id === adviceId ? scoredAdvice : a,
-                      );
-                      return { advice: updatedAdvice };
-                    });
+                    const currentAdvice = state.advice();
+                    const updatedAdvice = currentAdvice.map((a: Advice) =>
+                      a.id === adviceId ? scoredAdvice : a,
+                    );
+                    patchState(state, { advice: updatedAdvice });
                   },
                   error: (error) => {
                     patchState(state, {

@@ -1,21 +1,36 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { BadAdviceHotlineStore } from '@bad-advice-hotline/store';
 
 @Component({
   selector: 'bad-advice-hotline-game',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   template: `
     <div class="container mx-auto p-4">
       <div *ngIf="store.currentGame()">
-        <h1 class="text-2xl font-bold mb-4">
-          {{ store.currentGame()?.question }}
-        </h1>
+        <div class="flex justify-between items-center mb-4">
+          <h1 class="text-2xl font-bold">
+            {{ store.currentGame()?.question }}
+          </h1>
+          <a routerLink="/" class="text-blue-500 hover:text-blue-600"
+            >Back to Home</a
+          >
+        </div>
 
-        <div class="mb-8">
+        <div
+          *ngIf="!store.isGameActive()"
+          class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4"
+        >
+          <p>
+            This game has ended. You can still view the advice but cannot submit
+            new advice or score existing advice.
+          </p>
+        </div>
+
+        <div class="mb-8" *ngIf="store.isGameActive()">
           <h2 class="text-xl font-semibold mb-2">Submit Your Bad Advice</h2>
           <form (ngSubmit)="submitAdvice()" class="space-y-4">
             <div>
@@ -35,9 +50,10 @@ import { BadAdviceHotlineStore } from '@bad-advice-hotline/store';
             </div>
             <button
               type="submit"
-              class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              [disabled]="!adviceText.trim() || store.isLoading()"
+              class="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50"
             >
-              Submit Advice
+              {{ store.isLoading() ? 'Submitting...' : 'Submit Advice' }}
             </button>
           </form>
         </div>
@@ -46,7 +62,7 @@ import { BadAdviceHotlineStore } from '@bad-advice-hotline/store';
           <h2 class="text-xl font-semibold mb-2">Submitted Advice</h2>
           <div class="space-y-4">
             <div
-              *ngFor="let advice of store.advice()"
+              *ngFor="let advice of store.sortedAdvice()"
               class="bg-white shadow rounded-lg p-4"
             >
               <p class="text-gray-800">{{ advice.content }}</p>
@@ -55,10 +71,12 @@ import { BadAdviceHotlineStore } from '@bad-advice-hotline/store';
                   >Score: {{ advice.score }}</span
                 >
                 <button
+                  *ngIf="store.isGameActive()"
                   (click)="scoreAdvice(advice.id)"
-                  class="text-sm text-indigo-600 hover:text-indigo-900"
+                  [disabled]="store.isLoading()"
+                  class="text-sm text-indigo-600 hover:text-indigo-900 disabled:opacity-50"
                 >
-                  Score
+                  {{ store.isLoading() ? 'Scoring...' : 'Score' }}
                 </button>
               </div>
             </div>

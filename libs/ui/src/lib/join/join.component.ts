@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { BadAdviceHotlineStore } from '@bad-advice-hotline/store';
@@ -27,7 +27,6 @@ import { BadAdviceHotlineStore } from '@bad-advice-hotline/store';
                 class="w-full p-2 border rounded"
                 placeholder="Enter the game code"
                 required
-                pattern="[A-Za-z0-9]+"
                 #gameCodeInput="ngModel"
               />
               <div
@@ -64,12 +63,18 @@ export class JoinComponent {
   private router = inject(Router);
   gameCode = '';
 
-  async onJoinGame() {
+  constructor() {
+    effect(() => {
+      const game = this.store.currentGame();
+      if (game) {
+        this.router.navigate(['/game', game.id]);
+      }
+    });
+  }
+
+  onJoinGame() {
     if (this.gameCode.trim()) {
       this.store.loadGame(this.gameCode.trim());
-      if (this.store.currentGame()) {
-        this.router.navigate(['/game', this.store.currentGame()!.id]);
-      }
       this.gameCode = '';
     }
   }

@@ -1,4 +1,5 @@
-import { Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import {
   GameComponent,
   HomeComponent,
@@ -19,3 +20,9 @@ export const appRoutes: Routes = [
     component: HomeComponent,
   },
 ];
+
+@NgModule({
+  exports: [RouterModule],
+  imports: [RouterModule.forRoot(appRoutes)],
+})
+export class AppRoutingModule {}

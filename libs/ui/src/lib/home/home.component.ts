@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { BadAdviceHotlineStore } from '@bad-advice-hotline/store';
 
 @Component({
@@ -56,7 +56,17 @@ import { BadAdviceHotlineStore } from '@bad-advice-hotline/store';
 })
 export class HomeComponent {
   protected store = inject(BadAdviceHotlineStore);
+  private router = inject(Router);
   question = '';
+
+  constructor() {
+    effect(() => {
+      const game = this.store.currentGame();
+      if (game) {
+        this.router.navigate(['/game', game.id]);
+      }
+    });
+  }
 
   onCreateGame() {
     if (this.question.trim()) {
